@@ -3,6 +3,7 @@ import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import Login from './components/Login'
+import CreateBlog from './components/CreateBlog'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -35,6 +36,12 @@ const App = () => {
     window.localStorage.removeItem('loggedUser')
   }
 
+  const handleCreateBlog = async (blog) => {
+    console.log(blog)
+    const newBlog = await blogService.create(blog, user.token)
+    setBlogs(blogs.concat(newBlog))
+  }
+
   if (user === null) {
     return (
       <Login onSubmit={handleLogin} />
@@ -45,9 +52,12 @@ const App = () => {
     <div>
       <h2>blogs</h2>
       <p>{user.name} logged-in <button onClick={handleLogout}>Log out</button></p>
+      <CreateBlog onCreate={handleCreateBlog}/>
+      <div>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
+      </div>
     </div>
   )
 }
