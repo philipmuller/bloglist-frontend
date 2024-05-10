@@ -1,0 +1,17 @@
+.notification {
+    color: darkolivegreen;
+    background: rgb(171, 215, 171);
+    font-size: 20px;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+.error {
+    color: darkred;
+    background: rgb(215, 171, 171);
+    font-size: 20px;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
