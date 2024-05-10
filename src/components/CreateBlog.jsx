@@ -2,22 +2,16 @@ import { useState } from 'react'
 
 const CreateBlog = ({ onCreate }) => {
     const [newBlogVisible, setNewBlogVisible] = useState(false)
-    const [title, setTitle] = useState('')
-    const [author, setAuthor] = useState('')
-    const [url, setUrl] = useState('')
+    const [blogData, setBlogData] = useState({ title: '', author: '', url: '' })
 
     const handleCreatePress = (event) => {
         event.preventDefault()
-        setTitle('')
-        setAuthor('')
-        setUrl('')
-        onCreate({ title, author, url })
+        onCreate(blogData)
+        setBlogData({ title: '', author: '', url: '' })
     }
 
     const handleCancelPress = () => {
-        setTitle('')
-        setAuthor('')
-        setUrl('')
+        setBlogData({ title: '', author: '', url: '' })
         setNewBlogVisible(false)
     }
 
@@ -30,13 +24,13 @@ const CreateBlog = ({ onCreate }) => {
         <h2>Create new entry</h2>
         <form onSubmit={handleCreatePress}>
             <div>
-                Title: <input value={title} onChange={(event) => {setTitle(event.target.value)}}/>
+                Title: <input value={blogData.title} onChange={(event) => {setBlogData({...blogData, title: event.target.value})}}/>
             </div>
             <div>
-                Author: <input value={author} onChange={(event) => {setAuthor(event.target.value)}}/>
+                Author: <input value={blogData.author} onChange={(event) => {setBlogData({...blogData, author: event.target.value})}}/>
             </div>
             <div>
-                URL: <input value={url} onChange={(event) => {setUrl(event.target.value)}}/>
+                URL: <input value={blogData.url} onChange={(event) => {setBlogData({...blogData, url: event.target.value})}}/>
             </div>
             <button type="submit">Create</button>
             <button onClick={handleCancelPress}>Cancel</button>
