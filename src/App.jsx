@@ -58,6 +58,16 @@ const App = () => {
     displayNotification(`A new blog ${newBlog.title} by ${newBlog.author} added`, 'notification')
   }
 
+  const handleLikeBlog = async (blog) => {
+    const likedBlog = await blogService.like(blog, user.token)
+    if (likedBlog) {
+      const newBlogs = blogs.map(b => b.id === likedBlog.id ? likedBlog : b)
+      setBlogs(newBlogs)
+    } else {
+      console.log("Error liking blog")
+    }
+  }
+
   if (user === null) {
     return (
       <Login onSubmit={handleLogin} notiMessage={notification}/>
@@ -72,7 +82,7 @@ const App = () => {
       <CreateBlog onCreate={handleCreateBlog}/>
       <div>
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
+        <Blog key={blog.id} blog={blog} onLikeBlog={handleLikeBlog} />
       )}
       </div>
     </div>
