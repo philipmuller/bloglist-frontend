@@ -68,6 +68,22 @@ const App = () => {
     }
   }
 
+  const handleDeleteBlog = async (blog) => {
+    const confirmation = window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)
+
+    if (!confirmation) { return }
+
+    const deletedBlog = await blogService.deleteBlog(blog, user.token)
+
+    if (deletedBlog) {
+      const newBlogs = blogs.filter(b => b.id !== blog.id)
+      setBlogs(newBlogs)
+      displayNotification(`Blog ${blog.title} by ${blog.author} deleted`, 'notification')
+    } else {
+      displayNotification('Error deleting blog', 'error')
+    }
+  }
+
   if (user === null) {
     return (
       <Login onSubmit={handleLogin} notiMessage={notification}/>
@@ -82,7 +98,7 @@ const App = () => {
       <CreateBlog onCreate={handleCreateBlog}/>
       <div>
       {blogs.sort((a, b) => b.likes - a.likes).map(blog =>
-        <Blog key={blog.id} blog={blog} onLikeBlog={handleLikeBlog} />
+        <Blog key={blog.id} blog={blog} onLikeBlog={handleLikeBlog} showDelete={blog.user.username === user.username} onDeleteBlog={handleDeleteBlog} />
       )}
       </div>
     </div>

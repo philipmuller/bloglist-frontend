@@ -1,21 +1,18 @@
 import { useState } from "react"
 
-const Blog = ({ blog, onLikeBlog }) => {
+const Blog = ({ blog, onLikeBlog, showDelete, onDeleteBlog }) => {
   const [detailShown, setDetailShown] = useState(false)
 
   const toggleDetail = () => {
     setDetailShown(!detailShown)
   }
 
-  const handleLikeBlog = () => {
-    onLikeBlog(blog)
-  }
-
   const details = () => (
     <div>
       <div>{blog.url}</div>
-      <div>{blog.likes} likes <button onClick={handleLikeBlog}>like</button></div>
+      <div>{blog.likes} likes <button onClick={() => onLikeBlog(blog)}>like</button></div>
       <div>added by {blog.user.name}</div>
+      {showDelete && <button onClick={() => onDeleteBlog(blog)}>Delete blog</button>}
     </div>
   )
 

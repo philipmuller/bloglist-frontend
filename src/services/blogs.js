@@ -30,4 +30,16 @@ const like = async (blog, token) => {
   }
 }
 
-export default { getAll, create, like }
+const deleteBlog = async (blog, token) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` }
+  }
+  try {
+    const response = await axios.delete(`${baseUrl}/${blog.id}`, config)
+    return "success"
+  } catch (error) {
+    return null
+  }
+}
+
+export default { getAll, create, like, deleteBlog }
