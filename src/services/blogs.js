@@ -23,7 +23,7 @@ const like = async (blog, token) => {
     headers: { Authorization: `Bearer ${token}` }
   }
   try {
-    const response = await axios.put(`${baseUrl}/${blog.id}`, {...blog, likes: blog.likes+1}, config)
+    const response = await axios.put(`${baseUrl}/${blog.id}`, { ...blog, likes: blog.likes+1 }, config)
     return response.data
   } catch (error) {
     return null
@@ -36,7 +36,7 @@ const deleteBlog = async (blog, token) => {
   }
   try {
     const response = await axios.delete(`${baseUrl}/${blog.id}`, config)
-    return "success"
+    return 'success'
   } catch (error) {
     return null
   }

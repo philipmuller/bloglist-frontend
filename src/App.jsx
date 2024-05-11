@@ -26,13 +26,13 @@ const App = () => {
   }, [])
 
   const displayNotification = (message, type) => {
-    setNotification({message, type})
+    setNotification({ message, type })
     setTimeout(() => {
       setNotification(null)
     }, 5000)
   }
 
-  const handleLogin = async ({username, password}) => {
+  const handleLogin = async ({ username, password }) => {
     const authUser = await loginService.login({ username, password })
     if (authUser) {
       setUser(authUser)
@@ -64,7 +64,7 @@ const App = () => {
       const newBlogs = blogs.map(b => b.id === likedBlog.id ? likedBlog : b)
       setBlogs(newBlogs)
     } else {
-      console.log("Error liking blog")
+      console.log('Error liking blog')
     }
   }
 
@@ -97,9 +97,9 @@ const App = () => {
       <p>{user.name} logged-in <button onClick={handleLogout}>Log out</button></p>
       <CreateBlog onCreate={handleCreateBlog}/>
       <div>
-      {blogs.sort((a, b) => b.likes - a.likes).map(blog =>
-        <Blog key={blog.id} blog={blog} onLikeBlog={handleLikeBlog} showDelete={blog.user.username === user.username} onDeleteBlog={handleDeleteBlog} />
-      )}
+        {blogs.sort((a, b) => b.likes - a.likes).map(blog =>
+          <Blog key={blog.id} blog={blog} onLikeBlog={handleLikeBlog} showDelete={blog.user.username === user.username} onDeleteBlog={handleDeleteBlog} />
+        )}
       </div>
     </div>
   )
