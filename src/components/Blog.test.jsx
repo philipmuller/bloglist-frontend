@@ -14,10 +14,12 @@ const blog = {
 
 describe('<Blog />', () => {
   let container
+  let likesCounter
 
   beforeEach(() => {
+    likesCounter = 0
     container = render(
-      <Blog blog={blog} onLikeBlog={() => undefined}/>
+      <Blog blog={blog} onLikeBlog={() => {likesCounter += 1}}/>
     ).container
   })
 
@@ -37,4 +39,19 @@ describe('<Blog />', () => {
 
     await container.querySelector('.blogDetails')
   })
+
+  test('If the like button is clicked twice, the event handler the component received as props is called twice.', async () => {
+    const user = userEvent.setup()
+    const detailsDutton = screen.getByText('view details')
+    await user.click(detailsDutton)
+    //details section is now expanded
+
+    const likeButton = screen.getByText('like')
+    await user.click(likeButton)
+    await user.click(likeButton)
+    //like button is clicked twice, which should increase the likesCounter by 2
+
+    expect(likesCounter).toBe(2)
+  })
+
 })
