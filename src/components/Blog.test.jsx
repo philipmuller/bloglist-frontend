@@ -14,12 +14,12 @@ const blog = {
 
 describe('<Blog />', () => {
   let container
-  let likesCounter
+  let likeCallback
 
   beforeEach(() => {
-    likesCounter = 0
+    likeCallback = vi.fn()
     container = render(
-      <Blog blog={blog} onLikeBlog={() => {likesCounter += 1}}/>
+      <Blog blog={blog} onLikeBlog={likeCallback}/>
     ).container
   })
 
@@ -51,7 +51,7 @@ describe('<Blog />', () => {
     await user.click(likeButton)
     //like button is clicked twice, which should increase the likesCounter by 2
 
-    expect(likesCounter).toBe(2)
+    expect(likeCallback.mock.calls).toHaveLength(2)
   })
 
 })
