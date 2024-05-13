@@ -25,13 +25,13 @@ const CreateBlog = ({ onCreate }) => {
       <h2>Create new entry</h2>
       <form onSubmit={handleCreatePress}>
         <div>
-                Title: <input value={blogData.title} onChange={(event) => {setBlogData({ ...blogData, title: event.target.value })}}/>
+                Title: <input className='titleInput' value={blogData.title} onChange={(event) => {setBlogData({ ...blogData, title: event.target.value })}}/>
         </div>
         <div>
-                Author: <input value={blogData.author} onChange={(event) => {setBlogData({ ...blogData, author: event.target.value })}}/>
+                Author: <input className='authorInput' value={blogData.author} onChange={(event) => {setBlogData({ ...blogData, author: event.target.value })}}/>
         </div>
         <div>
-                URL: <input value={blogData.url} onChange={(event) => {setBlogData({ ...blogData, url: event.target.value })}}/>
+                URL: <input className='urlInput' value={blogData.url} onChange={(event) => {setBlogData({ ...blogData, url: event.target.value })}}/>
         </div>
         <button type="submit">Create</button>
         <button onClick={handleCancelPress}>Cancel</button>
