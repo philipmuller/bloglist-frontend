@@ -9,7 +9,7 @@ const Blog = ({ blog, onLikeBlog, showDelete, onDeleteBlog }) => {
   }
 
   const details = () => (
-    <div>
+    <div className='blogDetails'>
       <div>{blog.url}</div>
       <div>{blog.likes} likes <button onClick={() => onLikeBlog(blog)}>like</button></div>
       <div>added by {blog.user.name}</div>
